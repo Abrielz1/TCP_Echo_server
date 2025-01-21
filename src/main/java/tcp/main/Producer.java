@@ -32,19 +32,24 @@ class ServerThread extends Thread {
     }
 
     public void run() {
+
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     client.getInputStream()));
             PrintWriter writer = new PrintWriter(client.getOutputStream(), true);
             writer.println("[type 'bye' to disconnect]");
             while (true) {
+
                 String line = reader.readLine();
+
                 if (line.trim().equals("bye")) {
                     writer.println("[bye!]");
                     break;
                 }
+
                 writer.println("[Echo]" + line);
             }
+
         } catch (IOException e) {
             System.err.println("Exception caught:" + e);
         } finally {
